@@ -1,3 +1,13 @@
+# Shell script
+https://www.datacamp.com/tutorial/how-to-write-bash-script-tutorial
+- Program that is interface to the operating system
+- Shell derived since outermost layer around operating system
+- Bash is a Unix command line interface responsible for interacting with a computer's operating system. Similarly to how movie scripts inform actors of what actions to take, a bash script tells the bash shell what to do. Thus, a bash script is a useful way to group commands to create a program. 
+
+## Specify interpreter
+```
+#!/bin/bash
+```
 # Tutorial being used
 https://docs.djangoproject.com/en/5.0/intro/tutorial01/
 
@@ -81,6 +91,8 @@ class Gene(models.Model):
 - Create urls.py in new app
 
 # Settings
+- Ensure the app you create is installed
+- Install rest_framework [rest](https://www.django-rest-framework.org/)
 ```
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -93,3 +105,11 @@ INSTALLED_APPS = [
     'rest_framework'
 ]
 ```
+
+# Entrez
+https://www.youtube.com/watch?v=tl4xqdfIBh0&list=PLubh2aIGoECIGHR02Zy0cNNZwpVkxG00a&index=5&ab_channel=LanaDominkovic
+
+https://github.com/lanadominkovic/12-days-of-biopython/blob/main/12_days_of_biopython/day_02/day_02-accessing-ncbi-databases.ipynb
+
+# Got CORS errors when connecting to react, answer
+https://stackoverflow.com/questions/44037474/cors-error-while-consuming-calling-rest-api-with-react

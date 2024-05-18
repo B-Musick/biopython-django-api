@@ -18,7 +18,7 @@ def dbs_list(request):
     Entrez.email = "bmuze1@gmail.com"
     stream = Entrez.einfo()
     record = Entrez.read(stream)
-    return Response({'databases':record['DbList']})
+    return Response(record['DbList'])
 
 @api_view(['POST'])
 def search(request):
