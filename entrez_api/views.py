@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from Bio import Entrez
 from Bio.SeqRecord import SeqRecord
 from Bio import SeqIO
+import json
 # Views responsible for returning our data
 
 '''
@@ -20,14 +21,54 @@ def dbs_list(request):
     record = Entrez.read(stream)
     return Response(record['DbList'])
 
-@api_view(['POST'])
+@api_view(['GET'])
 def search(request):
     Entrez.email = "bmuze1@gmail.com"
-    stream = Entrez.efetch(db="nucleotide", id="EU490707", rettype="gb", retmode="text")
-    record = SeqIO.read(stream, "genbank") # Seq object, can treat like string - See chapter 3 - https://biopython.org/DIST/docs/tutorial/Tutorial.html#sec17
+    # From the request it will take term from the search bar and use it for the term
+    search_term = request.query_params['searchTerm']
+    max_results = request.query_params['maxResults']
+    db_type= request.query_params['databaseType']
+
+    id_list = retrieveIdsFromEntrez(db_type, search_term, max_results)
+
+    records = fetchSeqRecordsFromId("nucleotide", id_list, "gb")
+
+    return Response(convertSeqRecordsToString(records))
+
+def retrieveIdsFromEntrez(db_type, search_term, max_results):
+    # Perform Entrez.esearch
+    handle = Entrez.esearch(db=db_type, term=search_term, retmax=max_results)
+    rec_list = Entrez.read(handle)
+    handle.close()
+
+    return rec_list['IdList']
+
+def fetchSeqRecordsFromId(dbToSearch, ids, returnType):
+    # Will get a list of records
+    stream = Entrez.efetch(db=dbToSearch, id=ids, rettype=returnType)
+    records = list(SeqIO.parse(stream, returnType)) # Seq object, can treat like string - See chapter 3 - https://biopython.org/DIST/docs/tutorial/Tutorial.html#sec17
     stream.close()
-    # print(str(record.seq))
-    return Response({'description':record.description, 'sequence': str(record.seq)})
+    
+    return records
 
 # def getIds(searchTerm):
+def convertSeqRecordsToString(records):
+    string_records = []
+
+       # records are in SeqRecord format, convert
+    for rec in records:
+        string_records.append({
+            "id": rec.id,
+            "seq": str(rec.seq),
+            "name": rec.name,
+            "description":rec.description,
+            "dbxrefs": rec.dbxrefs,
+            # "features": rec.features,
+            # Will have to create a serializer for annotations
+            "annotations": json.dumps(str(rec.annotations)),
+            "letter_annotations": rec.letter_annotations
+        })
+    
+    return string_records
+    
 

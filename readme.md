@@ -113,3 +113,15 @@ https://github.com/lanadominkovic/12-days-of-biopython/blob/main/12_days_of_biop
 
 # Got CORS errors when connecting to react, answer
 https://stackoverflow.com/questions/44037474/cors-error-while-consuming-calling-rest-api-with-react
+
+# Testing
+- need to name function with 'test_' before so django finds it
+https://www.django-rest-framework.org/api-guide/testing/
+
+https://stackoverflow.com/questions/67082368/django-unit-test-not-working-reverse-for-xxx-is-not-found-xxx-is-not-a-valid
+
+- Used this video for basic setup
+https://www.youtube.com/watch?v=17KdirMbmHY&t=612s
+
+- Django 
+https://docs.djangoproject.com/en/5.0/topics/testing/

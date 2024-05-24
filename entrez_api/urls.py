@@ -6,6 +6,6 @@ from entrez_api.views import dbs_list
 urlpatterns = [
     # When hit path want to hit the view, import the view
     # Then need to connect this urls.py to the app
-    path('search', search),
-    path('dbs_list', dbs_list),
+    path('search', search, name="search"),
+    path('dbs_list', dbs_list, name="dbs_list"),
 ]
