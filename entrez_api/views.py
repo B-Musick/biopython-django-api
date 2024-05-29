@@ -6,7 +6,7 @@ from Bio import Entrez
 from Bio.SeqRecord import SeqRecord
 from Bio import SeqIO
 import json
-# Views responsible for returning our data
+from entrez_api.serializer import SequenceRecordSerializer
 
 '''
 Will need to use ESearch to search term and getrecords by their ids
@@ -33,7 +33,8 @@ def search(request):
 
     records = fetchSeqRecordsFromId("nucleotide", id_list, "gb")
 
-    return Response(convertSeqRecordsToString(records))
+    serializer = SequenceRecordSerializer(records, many=True);
+    return Response(serializer.data)
 
 def retrieveIdsFromEntrez(db_type, search_term, max_results):
     # Perform Entrez.esearch
@@ -50,25 +51,5 @@ def fetchSeqRecordsFromId(dbToSearch, ids, returnType):
     stream.close()
     
     return records
-
-# def getIds(searchTerm):
-def convertSeqRecordsToString(records):
-    string_records = []
-
-       # records are in SeqRecord format, convert
-    for rec in records:
-        string_records.append({
-            "id": rec.id,
-            "seq": str(rec.seq),
-            "name": rec.name,
-            "description":rec.description,
-            "dbxrefs": rec.dbxrefs,
-            # "features": rec.features,
-            # Will have to create a serializer for annotations
-            "annotations": json.dumps(str(rec.annotations)),
-            "letter_annotations": rec.letter_annotations
-        })
-    
-    return string_records
     
 

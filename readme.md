@@ -125,3 +125,53 @@ https://www.youtube.com/watch?v=17KdirMbmHY&t=612s
 
 - Django 
 https://docs.djangoproject.com/en/5.0/topics/testing/
+
+# SeqFeatures
+- Features are returned frm entrez efech
+- They are returned are SeqFeature objects
+
+## Attributes
+type
+    – This is a textual description of the type of feature (for instance, this will be something like ‘CDS’ or ‘gene’).
+.location
+    – The location of the SeqFeature on the sequence that you are dealing with, see Section 4.3.2 below. The SeqFeature delegates much of its functionality to the location object, and includes a number of shortcut attributes for properties of the location:
+
+    .ref
+        – shorthand for .location.ref – any (different) reference sequence the location is referring to. Usually just None.
+    .ref_db
+        – shorthand for .location.ref_db – specifies the database any identifier in .ref refers to. Usually just None.
+    .strand
+        – shorthand for .location.strand – the strand on the sequence that the feature is located on. For double stranded nucleotide sequence this may either be 1 for the top strand, −1 for the bottom strand, 0 if the strand is important but is unknown, or None if it doesn’t matter. This is None for proteins, or single stranded sequences. 
+
+.qualifiers
+    – This is a Python dictionary of additional information about the feature. The key is some kind of terse one-word description of what the information contained in the value is about, and the value is the actual information. For example, a common key for a qualifier might be “evidence” and the value might be “computational (non-experimental).” This is just a way to let the person who is looking at the feature know that it has not be experimentally (i. e. in a wet lab) confirmed. Note that other the value will be a list of strings (even when there is only one string). This is a reflection of the feature tables in GenBank/EMBL files.
+.sub_features
+    – This used to be used to represent features with complicated locations like ‘joins’ in GenBank/EMBL files. This has been deprecated with the introduction of the CompoundLocation object, and should now be ignored.
+
+# SeqRecord
+```
+def convertSeqRecordsToString(records):
+    string_records = []
+
+       # records are in SeqRecord format, convert
+    for rec in records:
+        # print(rec.features[0]['DNA'])
+        for feature in rec.features:
+            print(feature.type)
+        for annotation in rec.annotations:
+            print(annotation+": ")
+            print(rec.annotations[annotation])
+        string_records.append({
+            "id": rec.id,
+            "seq": str(rec.seq),
+            "name": rec.name,
+            "description":rec.description,
+            "dbxrefs": rec.dbxrefs,
+            # "features": rec.features,
+            # Will have to create a serializer for annotations
+            "annotations": json.dumps(str(rec.annotations)),
+            "letter_annotations": rec.letter_annotations
+        })
+    
+    return string_records
+```
