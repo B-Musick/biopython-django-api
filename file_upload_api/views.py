@@ -1,0 +1,20 @@
+from django.shortcuts import render
+from Bio import SeqIO
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from io import StringIO
+from file_upload_api.serializer import FastaFileSerializer
+
+
+# Create your views here.
+@api_view(['POST'])
+def upload(request):
+    # Receive fasta or genbank file (check the type)
+    f = StringIO(request.FILES['file'].read().decode("utf-8"))
+    
+    serializer = FastaFileSerializer({"records":SeqIO.parse(f, request.POST['fileType'])})
+
+    return Response(serializer.data)
+
+def help(request):
+    return help(SeqIO)

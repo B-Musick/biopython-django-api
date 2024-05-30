@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'entrez_api',
+    'file_upload_api',
     'rest_framework',
     'corsheaders',
 ]
