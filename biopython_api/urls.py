@@ -20,5 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Included urls from sequence_api
-    path('entrez/', include('entrez_api.urls'))
+    path('entrez/', include('entrez_api.urls')),
+    path('file/', include('file_upload_api.urls'))
 ]

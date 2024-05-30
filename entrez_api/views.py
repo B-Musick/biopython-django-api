@@ -33,7 +33,7 @@ def search(request):
 
     records = fetchSeqRecordsFromId("nucleotide", id_list, "gb")
 
-    serializer = SequenceRecordSerializer(records, many=True);
+    serializer = SequenceRecordSerializer(records, many=True)
     return Response(serializer.data)
 
 def retrieveIdsFromEntrez(db_type, search_term, max_results):
