@@ -38,3 +38,28 @@ class EntrezTests(APITestCase):
         self.assertIn("letter_annotations", record)
 
         self.assertEqual("NM_005546.3", record["id"])
+
+    def test_upload_genbank_response(self):
+        file_path = os.path.join(module_dir, "public/sequence.gb")
+
+        response = ''
+
+        with open(file_path) as file:
+            response = self.client.post(self.upload_url, {"fileType":"gb", "file":file})
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(list(response.data)[0], 'records')
+        self.assertEqual(len(response.data), 1)
+        
+        record = response.data["records"][0]
+
+        self.assertIn("id", record)
+        self.assertIn("features", record)
+        self.assertIn("annotations", record)
+        self.assertIn("seq", record)
+        self.assertIn("name", record)
+        self.assertIn("description", record)
+        self.assertIn("dbxrefs", record)
+        self.assertIn("letter_annotations", record)
+
+        self.assertEqual("AY530803.2", record["id"])

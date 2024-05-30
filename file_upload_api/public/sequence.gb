@@ -1,0 +1,73 @@
+LOCUS       AY530803                 934 bp    mRNA    linear   PLN 16-DEC-2016
+DEFINITION  Populus balsamifera subsp. trichocarpa x Populus deltoides
+            peroxiredoxin Q (prxQ) mRNA, complete cds.
+ACCESSION   AY530803
+VERSION     AY530803.2
+KEYWORDS    .
+SOURCE      Populus trichocarpa x Populus deltoides
+  ORGANISM  Populus trichocarpa x Populus deltoides
+            Eukaryota; Viridiplantae; Streptophyta; Embryophyta; Tracheophyta;
+            Spermatophyta; Magnoliopsida; eudicotyledons; Gunneridae;
+            Pentapetalae; rosids; fabids; Malpighiales; Salicaceae; Saliceae;
+            Populus.
+REFERENCE   1  (bases 1 to 934)
+  AUTHORS   Rouhier,N., Gelhaye,E., Gualberto,J.M., Jordy,M.N., De Fay,E.,
+            Hirasawa,M., Duplessis,S., Lemaire,S.D., Frey,P., Martin,F.,
+            Manieri,W., Knaff,D.B. and Jacquot,J.P.
+  TITLE     Poplar peroxiredoxin Q. A thioredoxin-linked chloroplast
+            antioxidant functional in pathogen defense
+  JOURNAL   Plant Physiol. 134 (3), 1027-1038 (2004)
+   PUBMED   14976238
+REFERENCE   2  (bases 1 to 934)
+  AUTHORS   Rouhier,N., Gelhaye,E., Gualberto,J., Jordy,M.-N., De fay,E.,
+            Hirasawa,M., Duplessis,S., Martin,F., Manieri,W., Knaff,D.B. and
+            Jacquot,J.-P.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (20-JAN-2004) UMR 1136 INRA-UHP IaM, Universite Henri
+            Poincare, Faculte des Sciences, Vandoeuvre 54500, France
+REFERENCE   3  (bases 1 to 934)
+  AUTHORS   Rouhier,N., Gelhaye,E., Gualberto,J., Jordy,M.-N., De fay,E.,
+            Hirasawa,M., Duplessis,S., Martin,F., Manieri,W., Knaff,D.B. and
+            Jacquot,J.-P.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (16-DEC-2016) UMR 1136 INRA-UHP IaM, Universite Henri
+            Poincare, Faculte des Sciences, Vandoeuvre 54500, France
+  REMARK    Sequence update by database staff to remove vector contamination
+COMMENT     On Dec 16, 2016 this sequence version replaced AY530803.1.
+FEATURES             Location/Qualifiers
+     source          1..934
+                     /organism="Populus trichocarpa x Populus deltoides"
+                     /mol_type="mRNA"
+                     /cultivar="Beaupre"
+                     /db_xref="taxon:3695"
+     gene            1..934
+                     /gene="prxQ"
+     CDS             34..675
+                     /gene="prxQ"
+                     /note="thioredoxin peroxidase"
+                     /codon_start=1
+                     /product="peroxiredoxin Q"
+                     /protein_id="AAS46230.1"
+                     /translation="MASISLPKHSLPSLLPTLKPITSSSQNLPILSKSSQSQFYGLKF
+                     SHSTSLSIPSSSSVKNTIFAKVNKGQAPPSFTLKDQDGKTLSLSKFKGKPVVVYFYPA
+                     DETPGCTKQACAFRDSYEKFKKAGAEVVGISGDDPSSHKAFAKKYRLPFTLLSDEGNK
+                     IRKEWGVPADLFGTLPGRQTYVLDKKGVVQLIYNNQFQPEKHIDETLKLLQSL"
+ORIGIN      
+        1 gggggctact gttgtttcct tatccttgtc gaaatggctt ccatttctct ccctaaacac
+       61 tctctgccct ctttgcttcc cactcttaaa cccataacct catcttctca aaacctccca
+      121 attctctcca agtcatcgca gtcacagttc tatggcctca agttctccca ttctacttct
+      181 ctttcaatcc catcttcttc ttcggtgaag aataccattt ttgctaaggt aaacaaagga
+      241 caggcgccac catccttcac tttgaaagat caggatggaa agactttgtc cctctccaaa
+      301 ttcaaaggga agcctgtggt tgtctacttt taccctgctg atgaaacccc tgggtgcacc
+      361 aaacaggcct gtgcttttag agattcttat gagaagttca agaaagcagg cgctgaggtt
+      421 gttggaatta gtggtgatga tccatcatcg cacaaggcat ttgccaaaaa atacagactt
+      481 ccatttacat tgctgagcga tgaaggtaac aagataagga aagagtgggg agtgccagca
+      541 gacctgttcg ggaccttacc cgggagacag acatatgttc tggacaagaa aggggtggta
+      601 caactcatct acaacaatca gttccaacct gaaaagcata ttgatgaaac tcttaaacta
+      661 cttcaaagcc tttgaaccat ccattctatg tgtcttgctc tcgtctccac cttttccccc
+      721 attaatctat tgcttgaatg tatgaataat cttgctgtat ccaatccctt gtaatactag
+      781 tattatctgg gtaggaccct ttgtatcggt aacagaaata ctctttttcc ccttctctga
+      841 agacatgcat acttgctaga atgtcagtcg tcgtagcata atgaatacat atagatgcaa
+      901 tcgtctgcaa aaaaaaaaaa aaaaaaaaaa aaaa
+//
+
