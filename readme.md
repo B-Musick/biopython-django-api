@@ -175,3 +175,160 @@ def convertSeqRecordsToString(records):
     
     return string_records
 ```
+
+# Work in virtual environment
+```
+python3 -m venv env
+```
+
+- Then to activate
+```
+source env/bin/activate
+```
+## Issues
+- When creating got this error so had to install
+```
+The virtual environment was not created successfully because ensurepip is not
+available.  On Debian/Ubuntu systems, you need to install the python3-venv
+package using the following command.
+
+    apt install python3.10-venv
+
+You may need to use sudo with that command.  After installing the python3-venv
+package, recreate your virtual environment.
+
+Failing command: /home/brendan/Desktop/projects/biopython-django-api/biopython_api/env/bin/python3
+```
+
+# Requirements.txt
+- Place all depenedencies here and install
+https://www.freecodecamp.org/news/python-requirementstxt-explained/
+
+```
+pip install -r requirements.txt
+
+```
+
+# JWT Token
+https://www.youtube.com/watch?v=vLTJ_03Dq4M
+- JSON Web token
+- Open standard defining self contained way for sequrly transmitting info between parties as JSON data
+- Info is trusted since it is digitally signed using public private key pair (RSA)
+- Use for authorization
+    - Client signs in
+    - Issued JWT token by backend
+    - User will use this token to access the routes permitteb by token
+    - Api validate the signature, calculated using heading and
+
+## Parts
+- Header
+    - Type of token (eg. Bearer)
+    - Type of algorithm (eg. RSA)
+    - The contents of this header are base64URL encoded
+- Payload
+    - Have claims
+        - Registerd (issuer, expiration, audience )
+        - Public (Created to share info on those that agree)
+        - Private
+    ```
+    {
+        "username": "tim",
+        "admin": true,
+        "exp"
+    }
+    ```
+- Signature
+
+- All these are separated by periods
+
+## Encrypting vs signing
+- Encryption converts to form where cant be read, make sure to do this with sensitive data in token
+- Signing - type of electronic signature that encypts documents with digital codes that are difficult to duplicate
+
+## Signature
+- Take encoded header, payload and secret key
+- Then use RSA algorithm to sign the token
+- This can be verified from the receiving party (user) - which will determine if valid without having secret key
+
+## process
+- User logs in, asks for token
+    - Grant them Access token and refresh token
+    - Front end stores both of these
+- User uses the access token
+- Validates
+- Sends back JWT token to user with permissions
+- Dont store in local storage
+- Want to store in browser (httpOnly cookie) - accessible from browser but not JS
+- JWT token needs to be sent to server through Authorization header
+
+```
+{
+    "headers": {
+        "Authorization": "Bearer HEADER.PAYLOAD.SIGNATURE"
+    }
+}
+```
+
+# ORM - object relational mapping
+- Maps objects to code needing to be executed in the DB
+- We can write python and django handles execution
+- From api we accept JSON data and return it
+- Need to create serializer to take python object and convert to JSON
+
+# User
+- Django has default user 
+```
+from django.contrib.auth.models import User
+from rest_framework import serializers
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "username", "password", "email"]
+        # Accept password when creating user, but dont return when giving data
+        extra_kwargs = {"password": {"write_only": True}} 
+
+        def create(self, validated_data):
+            print(validated_data)
+            # Method called when want to create new version of user
+            # Serializer automatically looks at the fields and makes sure valid
+            user = User.objects.create_user(**validated_data)
+            return user
+
+```
+
+# Migrations
+- When make changes to data model, need to run migrations
+```
+python manage.py makemigrations
+```
+- MAke the file saying the migrations that need
+- Then to apply them run migration command, so proper tables setup
+
+```
+python manage.py migrate
+```
+
+# User auth
+- Register user
+- Submit user info to this route
+```
+/api/user/register
+```
+
+- Then need to request token with the following, and it will return access and refresh token
+```
+/api/token/
+```
+
+```
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxNzY4NjM1NiwiaWF0IjoxNzE3NTk5OTU2LCJqdGkiOiIwNjU4N2IxNTEyODg0MzEzOTk3MzY2YzA4YWE0MWRmNCIsInVzZXJfaWQiOjN9.rzqWg_eOFLAqDisqetJcI7OCnilYvNKi_8aFShdn3Cc",
+    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE3NjAxNzU2LCJpYXQiOjE3MTc1OTk5NTYsImp0aSI6IjFjYzdlZGM2NDM5MDQxZTQ5ZThkNGY3MjYxZGZkNWZjIiwidXNlcl9pZCI6M30.l3xLvsCgQ3s8gesYx48aTx15GQeyf1cWnTMxsxp187I"
+}
+```
+
+- Pass refresh token to get new access token
+```
+/api/token/refresh/
+```

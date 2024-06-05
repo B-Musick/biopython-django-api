@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+from dotenv import load_dotenv
+import os
+
+load_dotenv() # load environment variable file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,11 +31,28 @@ SECRET_KEY = 'django-insecure-bled_z=&2704)(=fts#5cy*5i#i6z1(h*a!@66c9@z9s8n5m4h
 DEBUG = True
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWS_CREDENTIALS = True
 
 ALLOWED_HOSTS = [
     '*'
-]
+] # Put star here so any different host can host this
 
+# Set the default authentication and permissions for JWT tokens
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
+
+# Set the lifetimes of tokens, refresh should be larger
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
 
 # Application definition
 
@@ -45,6 +67,7 @@ INSTALLED_APPS = [
     'file_upload_api',
     'rest_framework',
     'corsheaders',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -131,3 +154,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+ACCOUNT_AUTHENTICATION_METHOD = "email"
