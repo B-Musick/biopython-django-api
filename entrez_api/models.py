@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class SequenceFeatureLocation(models.Model):
     ref = models.TextField()
@@ -21,3 +22,6 @@ class SequenceRecord(models.Model):
     features = models.ForeignKey(SequenceFeature, on_delete=models.CASCADE)
     annotations = models.JSONField()
     letter_annotations = models.JSONField()
+    # On delete - if delete user, then should delete all of the sequence_records it has
+    # can access all sequenceRecords through '.sequence_records'
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sequence_records")

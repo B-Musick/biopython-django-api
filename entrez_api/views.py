@@ -52,4 +52,3 @@ def fetchSeqRecordsFromId(dbToSearch, ids, returnType):
     
     return records
     
-
