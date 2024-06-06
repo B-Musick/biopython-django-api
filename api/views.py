@@ -21,7 +21,7 @@ class SequenceRecordListCreate(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user # Get authenticated user, and use to filter records written by user
-        return SequenceRecords.objects.filter(author=user)
+        return SequenceRecord.objects.filter(author=user)
     
     def perform_create(self, serializer):
         # Pass serializer and validate, then add any extras that need to manually do

@@ -17,9 +17,9 @@ class SequenceFeatureSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class SequenceRecordSerializer(serializers.ModelSerializer):
-    features = SequenceFeatureSerializer(many=True)
-    annotations = serializers.DictField(child=serializers.CharField())
-
+    features = SequenceFeatureSerializer(many=True, allow_null=True)
+    annotations = serializers.DictField(child=serializers.CharField(), allow_null=True)
+    
     class Meta:
         model = SequenceRecord
         fields = "__all__"
