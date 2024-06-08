@@ -3,9 +3,10 @@ from django.contrib.auth.models import User
 from rest_framework import generics
 from .serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
-
+from rest_framework.decorators import api_view
 from entrez_api.serializer import SequenceRecordSerializer
 from entrez_api.models import SequenceRecord
+from rest_framework.response import Response
 
 # Implement registration form, generic view built into django 
 class CreateUserView(generics.CreateAPIView):
@@ -13,6 +14,13 @@ class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer # What kind of data to create user
     permission_classes = [AllowAny] # allow anyone to call this
+
+@api_view(['GET'])
+def current_user(request):
+    serializer = UserSerializer(request.user)
+    permission_classes = [IsAuthenticated]
+    
+    return Response(serializer.data)
 
 # lists records or creates new one
 class SequenceRecordListCreate(generics.ListCreateAPIView):
