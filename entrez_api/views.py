@@ -14,6 +14,12 @@ Will need to use ESearch to search term and getrecords by their ids
 
 https://biopython.org/DIST/docs/tutorial/Tutorial.html#sec197
 '''
+def removeID(record):
+    # Need to delete id since it wase causing errors
+    record.biopython_id = record.id
+    del record.id
+    return record
+
 @api_view(['GET'])
 def dbs_list(request):
     Entrez.email = "bmuze1@gmail.com"
@@ -33,7 +39,7 @@ def search(request):
 
     records = fetchSeqRecordsFromId("nucleotide", id_list, "gb")
 
-    serializer = SequenceRecordSerializer(records, many=True)
+    serializer = SequenceRecordSerializer(map(removeID, records), many=True)
     return Response(serializer.data)
 
 def retrieveIdsFromEntrez(db_type, search_term, max_results):
