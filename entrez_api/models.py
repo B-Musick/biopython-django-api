@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class SequenceFeatureLocation(models.Model):
     ref = models.TextField()
@@ -13,11 +14,14 @@ class SequenceFeature(models.Model):
     qualifiers = models.JSONField()
     
 class SequenceRecord(models.Model):
-    id = models.TextField(primary_key=True)
+    biopython_id = models.TextField(null=True)
     seq = models.TextField()
     name = models.TextField()
-    description = models.TextField()
-    dbxrefs = models.JSONField()
-    features = models.ForeignKey(SequenceFeature, on_delete=models.CASCADE)
-    annotations = models.JSONField()
-    letter_annotations = models.JSONField()
+    description = models.TextField(blank=True)
+    dbxrefs = models.JSONField(null=True)
+    features = models.ForeignKey(SequenceFeature, on_delete=models.CASCADE, null=True)
+    annotations = models.JSONField(null=True)
+    letter_annotations = models.JSONField(null=True)
+    # On delete - if delete user, then should delete all of the sequence_records it has
+    # can access all sequenceRecords through '.sequence_records'
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sequence_records")
