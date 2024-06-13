@@ -3,10 +3,13 @@ from rest_framework import status
 from django.urls import reverse;
 from rest_framework.test import APITestCase, APIClient
 import os
+from biopython_api.tests import GlobalTestCase
+
 module_dir = os.path.dirname(__file__)  # get current directory
 
-class EntrezTests(APITestCase):
+class EntrezTests(GlobalTestCase):
     def setUp(self):
+        super(GlobalTestCase, self).setUp()
         self.upload_url = reverse('upload')
 
         return super().setUp()
@@ -28,7 +31,7 @@ class EntrezTests(APITestCase):
         
         record = response.data["records"][0]
 
-        self.assertIn("id", record)
+        self.assertIn("biopython_id", record)
         self.assertIn("features", record)
         self.assertIn("annotations", record)
         self.assertIn("seq", record)
@@ -37,7 +40,7 @@ class EntrezTests(APITestCase):
         self.assertIn("dbxrefs", record)
         self.assertIn("letter_annotations", record)
 
-        self.assertEqual("NM_005546.3", record["id"])
+        self.assertEqual("NM_005546.3", record["biopython_id"])
 
     def test_upload_genbank_response(self):
         file_path = os.path.join(module_dir, "public/sequence.gb")
@@ -53,7 +56,7 @@ class EntrezTests(APITestCase):
         
         record = response.data["records"][0]
 
-        self.assertIn("id", record)
+        self.assertIn("biopython_id", record)
         self.assertIn("features", record)
         self.assertIn("annotations", record)
         self.assertIn("seq", record)
@@ -62,4 +65,4 @@ class EntrezTests(APITestCase):
         self.assertIn("dbxrefs", record)
         self.assertIn("letter_annotations", record)
 
-        self.assertEqual("AY530803.2", record["id"])
+        self.assertEqual("AY530803.2", record["biopython_id"])

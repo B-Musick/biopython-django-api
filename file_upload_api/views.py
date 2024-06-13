@@ -18,7 +18,6 @@ def upload(request):
     f = StringIO(request.FILES['file'].read().decode("utf-8"))
     
     serializer = FastaFileSerializer({"records":map(removeID,SeqIO.parse(f, request.POST['fileType']))})
-    print(serializer.data)
     return Response(serializer.data)
 
 def help(request):

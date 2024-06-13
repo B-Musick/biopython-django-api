@@ -332,3 +332,7 @@ python manage.py migrate
 ```
 /api/token/refresh/
 ```
+
+# Test Authorization
+https://stackoverflow.com/questions/47576635/django-rest-framework-jwt-unit-test
+- Had to add token and user auth to test routes

@@ -11,7 +11,6 @@ def uniprot(request):
     # From the request it will take term from the search bar and use it for the term
     accessions = request.query_params['accessions']
     accessions_array = accessions.split(',')
-    print(accessions_array)
     records = []
 
     for accession in accessions_array:
@@ -19,7 +18,6 @@ def uniprot(request):
         handle = ExPASy.get_sprot_raw(accession)
         record = SwissProt.read(handle)
         records.append(record)
-        print(record.sequence)
         handle.close()
 
     # records = fetchSeqRecordsFromId("nucleotide", id_list, "gb")
