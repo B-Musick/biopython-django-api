@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Included urls from sequence_api
     path('entrez/', include('entrez_api.urls')),
+    path('protein/', include('protein_api.urls')),
     path('file/', include('file_upload_api.urls')),
     path("api/user/register/", CreateUserView.as_view(), name="register"),
     path("api/token/", TokenObtainPairView.as_view(), name="get_token"),

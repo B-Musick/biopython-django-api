@@ -32,6 +32,7 @@ def search(request):
     Entrez.email = "bmuze1@gmail.com"
     # From the request it will take term from the search bar and use it for the term
     search_term = request.query_params['searchTerm']
+    print(search_term)
     max_results = request.query_params['maxResults']
     db_type= request.query_params['databaseType']
 
