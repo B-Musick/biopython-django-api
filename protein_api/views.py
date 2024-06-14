@@ -41,3 +41,12 @@ class SwissProtRecordListCreate(generics.ListCreateAPIView):
             serializer.save(author=self.request.user)
         else: 
             print(serilizer.errors)
+
+class SwissProtRecordDelete(generics.DestroyAPIView):
+    serializer_class = SwissProtRecordSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Only delete records you own
+        user = self.request.user
+        return SwissProtRecord.objects.filter(author=user)
