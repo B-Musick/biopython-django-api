@@ -17,6 +17,7 @@ class ProteinApiTests(GlobalTestCase):
         super(ProteinApiTests, self).setUp()
 
         self.uniprot_url = reverse('uniprot')
+        self.protein_url = reverse('protein')
         
         # return super().setUp()
     
@@ -46,4 +47,17 @@ class ProteinApiTests(GlobalTestCase):
             ,response.data[1]['sequence']
         )
 
+    def test_protein_submission(self):
+        protein = {
+            "entry_name": "CSPLT_ORYSI",
+            "sequence": "MRASRPVVHPVEAPPPAALAVAAAAVAVEAGVGAGGGAAAHGGENAQPRGVRMKDPPGAPGTPGGLGLRLVQAFFAAAALAVMASTDDFPSVSAFCYLVAAAILQCLWSLSLAVVDIYALLVKRSLRNPQAVCIFTIGDGITGTLTLGAACASAGITVLIGNDLNICANNHCASFETATAMAFISWFALAPSCVLNFWSMASR"
+        }
 
+        response = self.client.post(
+            self.protein_url, protein, format="json"
+        )
+        print(response)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(len(response.data), 2)
+        self.assertEqual(response.data["entry_name"], "CSPLT_ORYSI")
+        self.assertEqual(response.data["sequence"], "MRASRPVVHPVEAPPPAALAVAAAAVAVEAGVGAGGGAAAHGGENAQPRGVRMKDPPGAPGTPGGLGLRLVQAFFAAAALAVMASTDDFPSVSAFCYLVAAAILQCLWSLSLAVVDIYALLVKRSLRNPQAVCIFTIGDGITGTLTLGAACASAGITVLIGNDLNICANNHCASFETATAMAFISWFALAPSCVLNFWSMASR")

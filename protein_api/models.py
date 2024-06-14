@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class SwissProtRecord(models.Model):
@@ -11,4 +12,4 @@ class SwissProtRecord(models.Model):
     # letter_annotations = models.JSONField(null=True)
     # # On delete - if delete user, then should delete all of the sequence_records it has
     # # can access all sequenceRecords through '.sequence_records'
-    # author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sequence_records")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="swiss_prot_records")
