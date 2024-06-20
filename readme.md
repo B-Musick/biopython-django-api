@@ -1,3 +1,33 @@
+# /admin
+username: musick
+password: computer password 
+
+## How to create admin
+https://www.youtube.com/watch?v=4tiSmL4JmS0
+- Created a superuser using 
+```
+python3 manage.py createsuperuser
+```
+
+- Then had to register the object model to see it in the admin panel, in admin.py:
+```
+from django.contrib import admin
+from .models import SwissProtRecord
+
+# Register your models here.
+admin.site.register(SwissProtRecord)
+```
+# Run
+
+```
+python3 manage.py runserver
+```
+
+- Created a virtual environment so:
+```
+source env/bin/activate
+```
+
 # Shell script
 https://www.datacamp.com/tutorial/how-to-write-bash-script-tutorial
 - Program that is interface to the operating system

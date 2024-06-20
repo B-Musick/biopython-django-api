@@ -9,11 +9,6 @@ from biopython_api.tests import GlobalTestCase
 
 class ProteinApiTests(GlobalTestCase):
     def setUp(self):
-        # user = User.objects.get(id=1)
-        # user = User.objects.create_user(username='brendy', email='bmuze1@gmail.com', password='test')
-        # client = APIClient()
-        # refresh = RefreshToken.for_user(user)
-        # self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}')
         super(ProteinApiTests, self).setUp()
 
         self.uniprot_url = reverse('uniprot')
