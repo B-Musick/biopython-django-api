@@ -9,7 +9,6 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {"password": {"write_only": True}} 
 
     def create(self, validated_data):
-        print(validated_data)
         # Method called when want to create new version of user
         # Serializer automatically looks at the fields and makes sure valid
         user = User.objects.create_user(**validated_data)

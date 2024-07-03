@@ -1,3 +1,34 @@
+# /admin
+username: musick
+password: computer password 
+
+## How to create admin
+https://www.youtube.com/watch?v=4tiSmL4JmS0
+- Created a superuser using 
+```
+python3 manage.py createsuperuser
+```
+
+- Then had to register the object model to see it in the admin panel, in admin.py:
+```
+from django.contrib import admin
+from .models import SwissProtRecord
+
+# Register your models here.
+admin.site.register(SwissProtRecord)
+```
+# Run
+- Created a virtual environment so have to run first:
+```
+source env/bin/activate
+```
+
+```
+python3 manage.py runserver
+```
+
+
+
 # Shell script
 https://www.datacamp.com/tutorial/how-to-write-bash-script-tutorial
 - Program that is interface to the operating system
@@ -332,3 +363,7 @@ python manage.py migrate
 ```
 /api/token/refresh/
 ```
+
+# Test Authorization
+https://stackoverflow.com/questions/47576635/django-rest-framework-jwt-unit-test
+- Had to add token and user auth to test routes

@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'entrez_api',
     'file_upload_api',
+    'protein_api',
     'rest_framework',
     'corsheaders',
     'api'
