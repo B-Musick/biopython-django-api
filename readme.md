@@ -1,3 +1,25 @@
+# Getting started
+
+## Create programming environment
+```
+python3 -m venv env
+```
+
+- Then to activate
+```
+source env/bin/activate
+```
+
+## Install Requirements
+- Found in requirements.txt
+```
+pip install -r requirements.txt
+```
+
+## Run program
+```
+python3 manage.py runserver
+```
 # /admin
 username: musick
 password: computer password 
