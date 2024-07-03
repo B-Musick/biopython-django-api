@@ -18,15 +18,16 @@ from .models import SwissProtRecord
 admin.site.register(SwissProtRecord)
 ```
 # Run
+- Created a virtual environment so have to run first:
+```
+source env/bin/activate
+```
 
 ```
 python3 manage.py runserver
 ```
 
-- Created a virtual environment so:
-```
-source env/bin/activate
-```
+
 
 # Shell script
 https://www.datacamp.com/tutorial/how-to-write-bash-script-tutorial
